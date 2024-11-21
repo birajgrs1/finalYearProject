@@ -1,0 +1,62 @@
+{% load static %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Video Analysis</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'demo/demo.css' %}">
+    <script src="{% static 'demo/demo.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload and Analyze Your Exercise Video</h1>
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="videoFileInput">Select Video File:</label>
+                <input type="file" id="videoFileInput" name="video_file" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exerciseTypeSelect">Exercise Type:</label>
+                <select id="exerciseTypeSelect" name="exercise_type" required>
+                    <option value="Squat">Squat</option>
+                    <option value="Pushup">Pushup</option>
+                </select>
+            </div>
+        </form>
+
+        <!-- Video preview -->
+        <div class="video-preview">
+            <h3>Video Preview:</h3>
+            <video id="videoPreview" width="400" controls style="display: none;">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Analyze button -->
+        <button id="analyzeButton" style="display: none;" class="btn">Analyze</button>
+
+        <!-- Results section -->
+        <div id="results" style="display: none;">
+            <h2>Analysis Results</h2>
+            <div class="processed-video">
+                <h3>Processed Video</h3>
+                <video width="400" controls>
+                    <source id="processedVideo" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="analysis-results">
+                <h3>Feedback</h3>
+                <p id="feedback"></p>
+                <p id="repsCount"></p>
+                <p id="accuracy"></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+
